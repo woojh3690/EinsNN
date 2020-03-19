@@ -1,5 +1,5 @@
-﻿#ifndef EINSNN_H_
-#define EINSNN_H_
+﻿#ifndef _EINSNN_H_
+#define _EINSNN_H_
 
 #include <vector>
 #include <string>
@@ -58,11 +58,16 @@ namespace EinsNN
 
 		void backprop(TensorD x, TensorD y)
 		{
-			/*TensorD 
-			for (auto layer : m_layers)
+			// 마지막 히든레이어 역전파 계산
+			TensorD back_data = y;
+			for (size_t i = m_layers.size() - 1; i > 0; i--)
 			{
+				m_layers[i]->backprop(m_layers[i - 1]->output(), back_data);
+				back_data = m_layers[i]->back_data();
+			}
 
-			}*/
+			// 첫번째 히든레이어 역전파 계산
+			m_layers.front()->backprop(x, m_layers[1]->back_data());
 		}
 
 		void update(Optimizer& opt)

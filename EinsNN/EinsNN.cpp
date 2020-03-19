@@ -15,6 +15,10 @@ int main()
 	model.set_layer(new Fully_connected(2, 5, new ELU()));
 	model.set_layer(new Fully_connected(5, 5, new ELU()));
 	model.set_layer(new Fully_connected(5, 5, new ELU()));
+	model.set_layer(new Fully_connected(5, 5, new ELU()));
+	model.set_layer(new Fully_connected(5, 5, new ELU()));
+	model.set_layer(new Fully_connected(5, 5, new ELU()));
+	model.set_layer(new Fully_connected(5, 5, new ELU()));
 	model.set_layer(new Fully_connected(5, 1));
 
 
@@ -32,12 +36,12 @@ int main()
 	x[3][0] = 7;
 	x[3][1] = 8;
 
-	vector<int> a = { 4 };
+	vector<int> a = { 4, 1 };
 	TensorD y(a);
-	y[0] = 4;
-	y[1] = 10;
-	y[2] = 16;
-	y[3] = 22;
+	y[0][0] = 4;
+	y[1][0] = 10;
+	y[2][0] = 16;
+	y[3][0] = 22;
 
 
 	model.fit(x, y, 100, adam);
