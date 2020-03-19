@@ -22,6 +22,9 @@
     <Filter Include="헤더 파일\Activation">
       <UniqueIdentifier>{5f88045e-124e-4090-9234-9e282454ba6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Loss">
+      <UniqueIdentifier>{2cc4486d-b87e-40f2-acd0-72a40b50ccdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EinsNN.cpp">
@@ -55,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="include\activation\NoneActivation.h">
       <Filter>헤더 파일\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Loss\MSE.h">
+      <Filter>헤더 파일\Loss</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Loss\Loss.h">
+      <Filter>헤더 파일\Loss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

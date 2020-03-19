@@ -95,6 +95,8 @@
     <ClInclude Include="include\EinsNN.h" />
     <ClInclude Include="include\layer\Fully_Connected.h" />
     <ClInclude Include="include\layer\Layer.h" />
+    <ClInclude Include="include\Loss\Loss.h" />
+    <ClInclude Include="include\Loss\MSE.h" />
     <ClInclude Include="include\opt\AdamOptimizer.h" />
     <ClInclude Include="include\opt\Optimizer.h" />
   </ItemGroup>

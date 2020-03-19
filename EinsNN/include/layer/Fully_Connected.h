@@ -15,7 +15,6 @@ namespace EinsNN
 		TensorD m_b, m_db;
 		TensorD m_z;
 		TensorD m_a;
-		TensorD m_din;
 
 		Activation* m_activeFunc = nullptr;
 
@@ -31,7 +30,7 @@ namespace EinsNN
 		{};
 		~Fully_connected();
 
-		void init()
+		void init() override
 		{
 			TensorD W({ this->m_in_size, this->m_out_size }, 0.01);
 			TensorD b({ this->m_out_size }, 0.01);
