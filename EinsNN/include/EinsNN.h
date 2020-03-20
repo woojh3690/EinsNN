@@ -45,6 +45,7 @@ namespace EinsNN
 				this->forward(x);
 				this->backprop(x, y);
 				this->update();
+				cout << i << endl;
 			}
 		}
 
@@ -59,7 +60,7 @@ namespace EinsNN
 		{
 			if (m_layers.size() <= 0)
 			{
-				return TensorD();
+				return *new TensorD();
 			}
 
 			this->forward(x);
@@ -86,10 +87,13 @@ namespace EinsNN
 			}
 		}
 
-		void backprop(TensorD x, TensorD y)
+		void backprop(TensorD input, TensorD target)
 		{
+			// 오차함수 계산
+			m_loss->evaluate(m_layers.back()->output(), target);
+			TensorD back_data = m_loss->back_data();
+
 			// 마지막 히든레이어 역전파 계산
-			TensorD back_data = y;
 			for (size_t i = m_layers.size() - 1; i > 0; i--)
 			{
 				m_layers[i]->backprop(m_layers[i - 1]->output(), back_data);
@@ -97,7 +101,7 @@ namespace EinsNN
 			}
 
 			// 첫번째 히든레이어 역전파 계산
-			m_layers.front()->backprop(x, m_layers[1]->back_data());
+			m_layers.front()->backprop(input, m_layers[1]->back_data());
 		}
 
 		void update()

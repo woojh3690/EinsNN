@@ -50,7 +50,6 @@ namespace EinsNN
 			TensorD dLz = m_activeFunc->apply_jacobian(m_z, m_a, for_data);
 			TensorD col;
 			col.append(pre_data.shape().back());
-			//m_dw.noalias() = prev_layer_data * dLz.transpose() / nobs;
 			m_dw = pre_data.transpose().matmul(dLz) / col;
 			m_db = dLz.mean();
 			m_din = m_W.matmul(dLz.transpose()).transpose();

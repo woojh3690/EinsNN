@@ -15,7 +15,7 @@ namespace EinsNN
 		~Loss() {}
 
 	public:
-		virtual void evaluate(TensorD y_hat, TensorD target) = 0;
+		virtual void evaluate(TensorD& y_hat, TensorD& target) = 0;
 		virtual TensorD& loss() = 0;
 		virtual TensorD& back_data() = 0;
 	};

@@ -23,10 +23,9 @@ int main()
 	model.set_layer(new Fully_connected(5, 1));
 
 	AdamOptimizer adam(0.001);
-	adam.set_Learning_Rate(0.001);
-
 	MSE mse;
 	model.compile(mse, adam);
+
 
 	TensorD x({ 4, 2 });
 	x[0][0] = 1;
@@ -45,7 +44,9 @@ int main()
 	y[2][0] = 16;
 	y[3][0] = 22;
 
-	model.fit(x, y, 100);
 
+	model.fit(x, y, 100);
+	//model.init();
+	model.predict(x);
 	return 0;
 }

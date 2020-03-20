@@ -18,7 +18,7 @@ namespace EinsNN
 
 	public:
 
-		virtual void evaluate(TensorD y_hat, TensorD target) override
+		virtual void evaluate(TensorD& y_hat, TensorD& target) override
 		{
 			checkData(y_hat, target);
 			m_din = y_hat - target;
