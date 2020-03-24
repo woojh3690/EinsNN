@@ -7,6 +7,7 @@
 #include "include/opt/AdamOptimizer.h"
 #include "include/activation/ELU.h"
 #include "include/Loss/MSE.h"
+#include "include/Callback/VerboseCallback.h"
 
 using namespace EinsNN;
 
@@ -39,8 +40,8 @@ int main()
 	y[2][0] = 16;
 	y[3][0] = 22;
 
-
-	model.fit(x, y, 5000);
+	VerboseCallback callBack;
+	model.fit(x, y, 5000, callBack);
 	Tensor<double> temp = model.predict(x);
 
 	return 0;

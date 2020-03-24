@@ -7,6 +7,7 @@
 #include "layer/Layer.h"
 #include "opt/Optimizer.h"
 #include "Loss/Loss.h"
+#include "Callback/Callback.h"
 
 namespace EinsNN
 {
@@ -36,16 +37,17 @@ namespace EinsNN
 			}
 		}
 
-		void fit(TensorD& x, TensorD& y, int epoche)
+		void fit(TensorD& x, TensorD& y, int epoche, EinsNN::Callback& callback)
 		{
 			init();
 
 			for (int i = 0; i < epoche; i++)
 			{
-				cout << i;
+				callback.pre_traning(this, i, x, y);
 				this->forward(x);
 				this->backprop(x, y);
 				this->update();
+				callback.post_traning(this, i, x, y);
 			}
 		}
 
@@ -54,7 +56,6 @@ namespace EinsNN
 			m_loss = &loss;
 			m_opt = &opt;
 		}
-
 
 		TensorD& predict(TensorD& x)
 		{
@@ -70,6 +71,11 @@ namespace EinsNN
 		string preview()
 		{
 			return "";
+		}
+
+		Loss& get_loss()
+		{
+			return *m_loss;
 		}
 
 	private:
@@ -92,7 +98,6 @@ namespace EinsNN
 			// 오차함수 계산
 			m_loss->evaluate(m_layers.back()->output(), target);
 			TensorD back_data = m_loss->back_data();
-			std::cout << m_loss->loss() << std::endl;
 
 			// 마지막 히든레이어 역전파 계산
 			for (size_t i = m_layers.size() - 1; i > 0; i--)
