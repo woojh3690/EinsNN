@@ -21,9 +21,19 @@ namespace EinsNN
 		{}
 		~Layer() {}
 
-		virtual void init() = 0;
+		int in_size() const
+		{
+			return m_in_size;
+		}
+
+		int out_size() const
+		{
+			return m_out_size;
+		}
 
 	public:
+		virtual void init() = 0;
+
 		/*
 		* @brief 순전파
 		* @param pre_data 이전 레이어에서 활성화 함수를 통과한 데이터들이다.
