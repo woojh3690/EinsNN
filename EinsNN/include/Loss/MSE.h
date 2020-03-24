@@ -6,14 +6,8 @@ namespace EinsNN
 {
 	class MSE : public Loss
 	{
-	private:
-		TensorD m_05;
-
 	public:
-		MSE() : Loss() 
-		{
-			m_05.append(0.5);
-		}
+		MSE() : Loss() {}
 		~MSE() {}
 
 	public:
@@ -26,7 +20,7 @@ namespace EinsNN
 
 		TensorD& loss() override
 		{
-			return this->m_din.pow().mean() * m_05;
+			return this->m_din.pow().mean() * 0.5;
 		}
 
 		TensorD& back_data() override
