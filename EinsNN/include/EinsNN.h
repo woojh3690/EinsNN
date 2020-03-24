@@ -22,6 +22,7 @@ namespace EinsNN
 		void set_layer(Layer* layer)
 		{
 			m_layers.push_back(layer);
+			check_layer_io();
 		}
 
 		Layer* get_layer(int layer_index)
@@ -115,6 +116,25 @@ namespace EinsNN
 			for (auto layer : m_layers)
 			{
 				layer->update(*m_opt);
+			}
+		}
+
+		/**
+		* @brief 레이어 간의 입출력사이즈 검사
+		*/
+		void check_layer_io() const
+		{
+			if (m_layers.size() <= 1)
+			{
+				return;
+			}
+
+			for (int i = 1; i < m_layers.size(); i++)
+			{
+				if (m_layers[i]->in_size() != m_layers[i - 1]->out_size())
+				{
+					throw std::invalid_argument("Unit sizes does not match");
+				}
 			}
 		}
 	};
