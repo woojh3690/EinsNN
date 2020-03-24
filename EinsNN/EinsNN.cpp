@@ -15,14 +15,9 @@ int main()
 	Model model;
 	model.set_layer(new Fully_connected(2, 5, new ELU()));
 	model.set_layer(new Fully_connected(5, 5, new ELU()));
-	model.set_layer(new Fully_connected(5, 5, new ELU()));
-	model.set_layer(new Fully_connected(5, 5, new ELU()));
-	model.set_layer(new Fully_connected(5, 5, new ELU()));
-	model.set_layer(new Fully_connected(5, 5, new ELU()));
-	model.set_layer(new Fully_connected(5, 5, new ELU()));
 	model.set_layer(new Fully_connected(5, 1));
 
-	AdamOptimizer adam(0.001);
+	AdamOptimizer adam(0.01);
 	MSE mse;
 	model.compile(mse, adam);
 
@@ -45,8 +40,8 @@ int main()
 	y[3][0] = 22;
 
 
-	model.fit(x, y, 100);
-	//model.init();
-	model.predict(x);
+	model.fit(x, y, 5000);
+	Tensor<double> temp = model.predict(x);
+
 	return 0;
 }

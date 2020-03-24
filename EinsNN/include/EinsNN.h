@@ -42,10 +42,10 @@ namespace EinsNN
 
 			for (int i = 0; i < epoche; i++)
 			{
+				cout << i;
 				this->forward(x);
 				this->backprop(x, y);
 				this->update();
-				cout << i << endl;
 			}
 		}
 
@@ -56,7 +56,7 @@ namespace EinsNN
 		}
 
 
-		TensorD predict(TensorD& x)
+		TensorD& predict(TensorD& x)
 		{
 			if (m_layers.size() <= 0)
 			{
@@ -92,6 +92,7 @@ namespace EinsNN
 			// 오차함수 계산
 			m_loss->evaluate(m_layers.back()->output(), target);
 			TensorD back_data = m_loss->back_data();
+			std::cout << m_loss->loss() << std::endl;
 
 			// 마지막 히든레이어 역전파 계산
 			for (size_t i = m_layers.size() - 1; i > 0; i--)
@@ -106,7 +107,10 @@ namespace EinsNN
 
 		void update()
 		{
-
+			for (auto layer : m_layers)
+			{
+				layer->update(*m_opt);
+			}
 		}
 	};
 }
