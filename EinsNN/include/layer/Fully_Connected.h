@@ -32,8 +32,8 @@ namespace EinsNN
 
 		void init() override
 		{
-			TensorD W({ this->m_in_size, this->m_out_size }, 0.01);
-			TensorD b({ this->m_out_size }, 0.01);
+			TensorD W({ this->m_in_size, this->m_out_size }, 1);
+			TensorD b({ this->m_out_size }, 0);
 			m_W = W;
 			m_b = b;
 		}
@@ -48,11 +48,16 @@ namespace EinsNN
 		void backprop(TensorD pre_data, TensorD for_data) override
 		{
 			TensorD dLz = m_activeFunc->apply_jacobian(m_z, m_a, for_data);
-			TensorD col;
-			col.append(pre_data.shape().back());
+			int col = pre_data.shape().back();
 			m_dw = pre_data.transpose().matmul(dLz) / col;
 			m_db = dLz.mean();
 			m_din = m_W.matmul(dLz.transpose()).transpose();
+		}
+
+		void update(Optimizer& opt) override
+		{
+			opt.update(m_dw, m_W);
+			opt.update(m_db, m_b);
 		}
 
 		TensorD& output() override
