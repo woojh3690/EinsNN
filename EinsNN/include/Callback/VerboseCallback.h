@@ -7,14 +7,17 @@
 
 namespace EinsNN
 {
-	class VerboseCallback : public EinsNN::Callback
+
+	class VerboseCallback : public Callback
 	{
-		void pre_traning(EinsNN::Model* model, int epoche, TensorD x, TensorD y) override
+		void pre_traning(const Model* model, int epoche, 
+			const TensorD& x, const TensorD& y) override
 		{
 
 		}
 
-		void post_traning(EinsNN::Model* model, int epoche, TensorD x, TensorD y) override
+		void post_traning(const Model* model, int epoche, 
+			const TensorD& x, const TensorD& y) override
 		{
 			TensorD loss = model->get_loss().loss();
 			char strPrint[100];

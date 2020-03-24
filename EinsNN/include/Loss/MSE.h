@@ -12,7 +12,7 @@ namespace EinsNN
 
 	public:
 
-		virtual void evaluate(TensorD& y_hat, TensorD& target) override
+		virtual void evaluate(const TensorD& y_hat, const TensorD& target) override
 		{
 			checkData(y_hat, target);
 			m_din = y_hat - target;
@@ -29,7 +29,7 @@ namespace EinsNN
 		}
 
 	private:
-		void checkData(TensorD& y_hat, TensorD& target)
+		void checkData(const TensorD& y_hat, const TensorD& target)
 		{
 			vector<int> y_hat_shape = y_hat.shape();
 			vector<int> target_shape = target.shape();

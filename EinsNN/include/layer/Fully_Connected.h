@@ -39,13 +39,13 @@ namespace EinsNN
 		}
 
 	public:
-		void forward(TensorD pre_data) override
+		void forward(const TensorD& pre_data) override
 		{
 			m_z = pre_data.matmul(m_W) + m_b;
 			m_a = m_activeFunc->activate(m_z);
 		}
 
-		void backprop(TensorD pre_data, TensorD for_data) override
+		void backprop(const TensorD& pre_data, const TensorD& for_data) override
 		{
 			TensorD dLz = m_activeFunc->apply_jacobian(m_z, m_a, for_data);
 			int col = pre_data.shape().back();

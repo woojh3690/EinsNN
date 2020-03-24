@@ -37,7 +37,7 @@ namespace EinsNN
 			}
 		}
 
-		void fit(TensorD& x, TensorD& y, int epoche, EinsNN::Callback& callback)
+		void fit(const TensorD& x, const TensorD& y, int epoche, Callback& callback)
 		{
 			init();
 
@@ -68,12 +68,12 @@ namespace EinsNN
 			return m_layers.back()->output();
 		}
 
-		string preview()
+		string preview() const
 		{
 			return "";
 		}
 
-		Loss& get_loss()
+		Loss& get_loss() const
 		{
 			return *m_loss;
 		}
@@ -83,7 +83,7 @@ namespace EinsNN
 		Optimizer* m_opt;
 		Loss* m_loss;
 
-		void forward(TensorD x)
+		void forward(const TensorD& x)
 		{
 			TensorD output = x;
 			for (auto layer : m_layers)
@@ -93,7 +93,7 @@ namespace EinsNN
 			}
 		}
 
-		void backprop(TensorD input, TensorD target)
+		void backprop(const TensorD& input, const TensorD& target)
 		{
 			// 오차함수 계산
 			m_loss->evaluate(m_layers.back()->output(), target);

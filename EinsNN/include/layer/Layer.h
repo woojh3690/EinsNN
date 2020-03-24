@@ -28,14 +28,15 @@ namespace EinsNN
 		* @brief 순전파
 		* @param pre_data 이전 레이어에서 활성화 함수를 통과한 데이터들이다.
 		*/
-		virtual void forward(TensorD pre_data) = 0;
+		virtual void forward(const TensorD& pre_data) = 0;
 
 		/*
 		* @brief 역전파
 		* @param pre_data 이전 레이어에서 활성화 함수를 통과한 데이터들이다.
 		* @param for_data 다음 레이어에서 계산된 미분값들이다.
 		*/
-		virtual void backprop(TensorD pre_data, TensorD for_data) = 0;
+		virtual void backprop(const TensorD& pre_data, 
+			const TensorD& for_data) = 0;
 
 		/*
 		* @brief 업데이트

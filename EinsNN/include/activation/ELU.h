@@ -24,7 +24,7 @@ namespace EinsNN
 		~ELU() {};
 
 	public:
-		TensorD& activate(TensorD& Z) override
+		TensorD& activate(const TensorD& Z) override
 		{
 			Tensor<bool> boolTsr = (Z > 0);
 			TensorD exp_minuse = (Z.exp() - 1);
@@ -33,7 +33,8 @@ namespace EinsNN
 			return *a;
 		}
 
-		TensorD& apply_jacobian(TensorD& Z, TensorD& A, TensorD& F) override
+		TensorD& apply_jacobian(const TensorD& Z, const TensorD& A, 
+			const TensorD& F) override
 		{
 			/*G.array() = (A.array() > Scalar(0)).select(
 				F, (A.array() + Scalar(0.01)) * F.array()

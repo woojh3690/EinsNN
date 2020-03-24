@@ -13,14 +13,17 @@ namespace EinsNN
 		~NoneActivation() {};
 
 	public:
-		TensorD& activate(TensorD& Z) override 
+		TensorD& activate(const TensorD& Z) override 
 		{
-			return Z;
+			TensorD* newZ = new TensorD(Z);
+			return *newZ;
 		}
 
-		TensorD& apply_jacobian(TensorD& Z, TensorD& A, TensorD& F) override
+		TensorD& apply_jacobian(const TensorD& Z, const TensorD& A, 
+			const TensorD& F) override
 		{
-			return F;
+			TensorD* newF = new TensorD(F);
+			return *newF;
 		}
 
 	};
