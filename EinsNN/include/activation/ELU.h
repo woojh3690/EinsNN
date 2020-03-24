@@ -26,9 +26,9 @@ namespace EinsNN
 	public:
 		TensorD& activate(TensorD& Z) override
 		{
-			Tensor<bool> boolTsr = (Z > m_zero);
-			TensorD exp_minuse = (Z.exp() - m_one);
-			TensorD right = exp_minuse * m_001;
+			Tensor<bool> boolTsr = (Z > 0);
+			TensorD exp_minuse = (Z.exp() - 1);
+			TensorD right = exp_minuse * 0.01;
 			TensorD* a = &boolTsr.select(Z, right);
 			return *a;
 		}
@@ -38,7 +38,7 @@ namespace EinsNN
 			/*G.array() = (A.array() > Scalar(0)).select(
 				F, (A.array() + Scalar(0.01)) * F.array()
 			);*/
-			return (A > m_zero).select(F, (A + m_001) * F);
+			return (A > 0).select(F, (A + 0.01) * F);
 		}
 	};
 }
