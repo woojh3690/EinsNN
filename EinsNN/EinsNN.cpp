@@ -41,7 +41,7 @@ int main()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 5000, callback);
+	model.fit(x, y, 6000, callback);
 	Tensor<double> temp = model.predict(x);
 
 	return 0;

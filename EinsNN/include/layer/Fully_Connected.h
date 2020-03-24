@@ -60,12 +60,12 @@ namespace EinsNN
 			opt.update(m_db, m_b);
 		}
 
-		TensorD& output() override
+		TensorD output() override
 		{
 			return m_a;
 		}
 
-		TensorD& back_data() override
+		TensorD back_data() override
 		{
 			return m_din;
 		}

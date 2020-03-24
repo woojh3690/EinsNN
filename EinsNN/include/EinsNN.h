@@ -58,7 +58,7 @@ namespace EinsNN
 			m_opt = &opt;
 		}
 
-		TensorD& predict(TensorD& x)
+		TensorD predict(const TensorD& x)
 		{
 			if (m_layers.size() <= 0)
 			{

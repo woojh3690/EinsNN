@@ -55,9 +55,9 @@ namespace EinsNN
 		*/
 		virtual void update(Optimizer& opt) = 0;
 
-		virtual TensorD& output() = 0;
+		virtual TensorD output() = 0;
 
-		virtual TensorD& back_data() = 0;
+		virtual TensorD back_data() = 0;
 
 	};
 } //namespace EinsNN
