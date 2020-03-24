@@ -3,6 +3,7 @@
 #define EINSNN_LAYER_H_
 
 #include "../Config.h"
+#include "../opt/Optimizer.h"
 
 namespace EinsNN
 {
@@ -35,6 +36,13 @@ namespace EinsNN
 		* @param for_data 다음 레이어에서 계산된 미분값들이다.
 		*/
 		virtual void backprop(TensorD pre_data, TensorD for_data) = 0;
+
+		/*
+		* @brief 업데이트
+		* @param 
+		*
+		*/
+		virtual void update(Optimizer& opt) = 0;
 
 		virtual TensorD& output() = 0;
 
