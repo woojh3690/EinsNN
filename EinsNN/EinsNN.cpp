@@ -14,14 +14,13 @@ using namespace EinsNN;
 int main()
 {
 	Model model;
-	model.set_layer(new Fully_connected(2, 5, new ELU()));
-	model.set_layer(new Fully_connected(5, 5, new ELU()));
-	model.set_layer(new Fully_connected(5, 1));
+	model.set_layer(new Fully_connected(2, 1, new ELU()));
+	model.set_layer(new Fully_connected(1, 1, new ELU()));
+	model.set_layer(new Fully_connected(1, 1));
 
-	AdamOptimizer adam(0.01);
+	AdamOptimizer adam(0.02);
 	MSE mse;
 	model.compile(mse, adam);
-
 
 	TensorD x({ 4, 2 });
 	x[0][0] = 1;
