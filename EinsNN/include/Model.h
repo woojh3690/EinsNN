@@ -8,6 +8,7 @@
 #include "opt/Optimizer.h"
 #include "Loss/Loss.h"
 #include "Callback/Callback.h"
+#include "BatchQueue.h"
 
 namespace EinsNN
 {
@@ -42,17 +43,24 @@ namespace EinsNN
 			}
 		}
 
-		void fit(const TensorD& x, const TensorD& y, int epoche, Callback& callback)
+		void fit(const TensorD& x, const TensorD& y, const int batch_size, 
+			int epoche, Callback& callback)
 		{
 			init();
 
+			BatchQueue queue;
+			queue.inQueue(x, y);
+
+			TensorD batch_x;
+			TensorD batch_y;
 			for (int i = 0; i < epoche; i++)
 			{
-				callback.pre_traning(this, i, x, y);
-				this->forward(x);
-				this->backprop(x, y);
+				queue.next(&batch_x, &batch_y, batch_size);
+				callback.pre_traning(this, i, batch_x, batch_y);
+				this->forward(batch_x);
+				this->backprop(batch_x, batch_y);
 				this->update();
-				callback.post_traning(this, i, x, y);
+				callback.post_traning(this, i, batch_x, batch_y);
 			}
 		}
 

@@ -152,6 +152,7 @@
     <ClInclude Include="include\activation\Activation.h" />
     <ClInclude Include="include\activation\ELU.h" />
     <ClInclude Include="include\activation\NoneActivation.h" />
+    <ClInclude Include="include\BatchQueue.h" />
     <ClInclude Include="include\Callback\Callback.h" />
     <ClInclude Include="include\Callback\VerboseCallback.h" />
     <ClInclude Include="include\Config.h" />
