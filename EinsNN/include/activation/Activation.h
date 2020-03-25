@@ -17,12 +17,12 @@ namespace EinsNN
 		~Activation() {};
 
 	public:
-		virtual TensorD& activate(const TensorD& Z) = 0;
+		virtual TensorD activate(const TensorD& Z) = 0;
 		//{
 		//	TensorD* aVirtual = new TensorD();
 		//	return *aVirtual;
 		//};
-		virtual TensorD& apply_jacobian(const TensorD& Z, const TensorD& A, 
+		virtual TensorD apply_jacobian(const TensorD& Z, const TensorD& A, 
 			const TensorD& F) = 0;
 		//{
 		//	TensorD* aVirtual = new TensorD();

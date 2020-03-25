@@ -18,9 +18,9 @@ namespace EinsNN
 			m_din = y_hat - target;
 		}
 
-		TensorD& loss() override
+		TensorD loss() override
 		{
-			return this->m_din.pow().mean() * 0.5;
+			return (m_din.pow().mean() * 0.5);
 		}
 
 		TensorD& back_data() override

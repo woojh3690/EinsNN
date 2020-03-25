@@ -16,7 +16,7 @@ namespace EinsNN
 
 	public:
 		virtual void evaluate(const TensorD& y_hat, const TensorD& target) = 0;
-		virtual TensorD& loss() = 0;
+		virtual TensorD loss() = 0;
 		virtual TensorD& back_data() = 0;
 	};
 

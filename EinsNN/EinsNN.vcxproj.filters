@@ -74,5 +74,8 @@
     <ClInclude Include="include\Callback\VerboseCallback.h">
       <Filter>헤더 파일\Callback</Filter>
     </ClInclude>
+    <ClInclude Include="include\Model.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

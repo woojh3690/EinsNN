@@ -28,7 +28,10 @@ namespace EinsNN
 		Fully_connected(const int input_size, const int output_size, Activation* activeFunc) :
 			Layer(input_size, output_size), m_activeFunc(activeFunc)
 		{}
-		~Fully_connected() {}
+		~Fully_connected()
+		{
+			delete m_activeFunc;
+		}
 
 		void init() override
 		{
