@@ -40,8 +40,14 @@ int main()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 100, 6000, callback);
-	Tensor<double> temp = model.predict(x);
+	model.fit(x, y, 100, 300, callback);
+
+	// 학습된 모델 평가
+	Tensor<double> y_pred = model.predict(x);
+
+	MSE new_mse;
+	new_mse.evaluate(y_pred, y);
+	double eval_loss = new_mse.loss().value();
 
 	return 0;
 }

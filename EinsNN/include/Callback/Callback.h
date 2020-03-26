@@ -19,9 +19,9 @@ namespace EinsNN
 
 		virtual ~Callback() {}
 
-		virtual void pre_traning(const Model* model, int epoche, 
+		virtual void pre_traning(int epoche,
 			const TensorD& x, const TensorD& y) = 0;
-		virtual void post_traning(const Model* model, int epoche, 
+		virtual void post_traning(const TensorD loss, int epoche,
 			const TensorD& x, const TensorD& y) = 0;
 	};
 }

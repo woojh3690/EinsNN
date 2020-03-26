@@ -48,19 +48,32 @@ namespace EinsNN
 		{
 			init();
 
+			// 큐
 			BatchQueue queue;
 			queue.inQueue(x, y);
 
+			// 학습
 			TensorD batch_x;
 			TensorD batch_y;
+			double global_loss;
+			int batch_count;
 			for (int i = 0; i < epoche; i++)
 			{
-				queue.next(&batch_x, &batch_y, batch_size);
-				callback.pre_traning(this, i, batch_x, batch_y);
-				this->forward(batch_x);
-				this->backprop(batch_x, batch_y);
-				this->update();
-				callback.post_traning(this, i, batch_x, batch_y);
+				callback.pre_traning(i, batch_x, batch_y);
+
+				// 배치 학습
+				global_loss = 0;
+				batch_count = 0;
+				queue.move_cursor_front();
+				while (queue.next(&batch_x, &batch_y, batch_size))
+				{
+					this->forward(batch_x);
+					this->backprop(batch_x, batch_y);
+					this->update();
+					global_loss += m_loss->loss().value();
+					batch_count++;
+				}
+				callback.post_traning(global_loss / batch_count, i, batch_x, batch_y);
 			}
 		}
 
@@ -91,7 +104,7 @@ namespace EinsNN
 			return *m_loss;
 		}
 
-	private:
+	public:
 		vector<Layer*> m_layers;
 		Optimizer* m_opt;
 		Loss* m_loss;

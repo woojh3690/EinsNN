@@ -49,8 +49,14 @@ namespace EinsNN
 			}
 		}
 
-		void next(TensorD* x, TensorD* y, const int batch_size)
+		bool next(TensorD* x, TensorD* y, const int batch_size)
 		{
+			if (m_cursor >= m_size)
+			{
+				return false;
+			}
+
+			bool exist_next = true;
 			x->~Tensor();
 			y->~Tensor();
 
@@ -58,20 +64,22 @@ namespace EinsNN
 			{
 				x->append(shuffle_x[m_cursor]);
 				y->append(shuffle_y[m_cursor]);
-				move_cursor();
+				m_cursor++;
+				if (m_cursor >= m_size)
+				{
+					break;
+				}
 			}
+
+			return true;
+		}
+
+		void move_cursor_front()
+		{
+			m_cursor = 0;
 		}
 
 	private:
-		void move_cursor()
-		{
-			m_cursor++;
-			if (m_cursor >= m_size)
-			{
-				m_cursor = 0;
-			}
-		}
-
 		int random_num(int min, int max)
 		{
 			return rand() % (max - min + 1) + min;

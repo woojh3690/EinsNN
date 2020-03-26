@@ -20,7 +20,7 @@ namespace EinsNN
 
 		TensorD loss() override
 		{
-			return (m_din.pow().mean() * 0.5);
+			return (m_din.pow().mean() * 0.5)[0];
 		}
 
 		TensorD& back_data() override
@@ -39,9 +39,9 @@ namespace EinsNN
 				throw invalid_argument("2차원만 지원");
 			}
 
-			if (y_hat_shape.front() != target_shape.front())
+			if (y_hat_shape != target_shape)
 			{
-				throw invalid_argument("row가 맞지 않습니다.");
+				throw invalid_argument("shape이 동일하지 않습니다.");
 			}
 		}
 	};
