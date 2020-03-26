@@ -22,8 +22,7 @@ namespace EinsNN
 		TensorD apply_jacobian(const TensorD& Z, const TensorD& A, 
 			const TensorD& F) override
 		{
-			TensorD* newF = new TensorD(F);
-			return *newF;
+			return F;
 		}
 
 	};
