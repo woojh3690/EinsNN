@@ -104,7 +104,7 @@ namespace EinsNN
 			return *m_loss;
 		}
 
-	public:
+	private:
 		vector<Layer*> m_layers;
 		Optimizer* m_opt;
 		Loss* m_loss;
