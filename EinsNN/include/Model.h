@@ -15,8 +15,14 @@ namespace EinsNN
 	class Model
 	{
 	public:
-		Model() {};
-		~Model() {};
+		Model() {}
+		~Model() 
+		{
+			for (auto layer : m_layers)
+				delete layer;
+			delete m_opt;
+			delete m_loss;
+		}
 
 	public:
 		void set_layer(Layer* layer)
