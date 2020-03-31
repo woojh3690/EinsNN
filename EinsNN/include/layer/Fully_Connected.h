@@ -73,6 +73,25 @@ namespace EinsNN
 			return m_din;
 		}
 
+		string get_name() override
+		{
+			return "Fully";
+		}
+
+		vector<string> get_hiper_param() override
+		{
+			vector<string> param;
+			param.push_back(to_string(m_in_size));
+			param.push_back(to_string(m_out_size));
+			param.push_back(m_activeFunc->return_type());
+			return param;
+		}
+
+		string get_weight() override
+		{
+			return m_W.toString() + m_b.toString();
+		}
+
 	};
 }
 #endif !EINSNN_FULLY_CONNECTED_H_

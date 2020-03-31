@@ -4,6 +4,8 @@
 
 #include "../Config.h"
 #include "../opt/Optimizer.h"
+#include <string>
+#include <vector>
 
 namespace EinsNN
 {
@@ -50,14 +52,19 @@ namespace EinsNN
 
 		/*
 		* @brief 업데이트
-		* @param 
-		*
+		* @param opt 최적화 모듈
 		*/
 		virtual void update(Optimizer& opt) = 0;
 
 		virtual TensorD output() = 0;
 
 		virtual TensorD back_data() = 0;
+
+		virtual string get_name() = 0;
+
+		virtual vector<string> get_hiper_param() = 0;
+
+		virtual string get_weight() = 0;
 
 	};
 } //namespace EinsNN

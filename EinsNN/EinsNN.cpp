@@ -1,7 +1,4 @@
-﻿// EinsNN.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include "include/EinsNN.h"
 #include "include/layer/Fully_Connected.h"
 #include "include/opt/AdamOptimizer.h"
@@ -14,9 +11,8 @@ using namespace EinsNN;
 int main()
 {
 	Model model;
-	model.set_layer(new Fully_connected(2, 1, new ELU()));
-	model.set_layer(new Fully_connected(1, 1, new ELU()));
-	model.set_layer(new Fully_connected(1, 1));
+	model.set_layer(new Fully_connected(2, 2, new ELU()));
+	model.set_layer(new Fully_connected(2, 1));
 
 	AdamOptimizer adam(0.02);
 	MSE mse;
@@ -40,14 +36,16 @@ int main()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 4, 300, callback);
+	model.fit(x, y, 4, 200, callback);
 
 	// 학습된 모델 평가
-	Tensor<double> y_pred = model.predict(x);
+	Matrix::Tensor<double> y_pred = model.predict(x);
 
 	MSE new_mse;
 	new_mse.evaluate(y_pred, y);
 	double eval_loss = new_mse.loss().value();
-
+	string path = "./save-1.txt";
+	model.save(path);
+	model.load(path);
 	return 0;
 }

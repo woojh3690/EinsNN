@@ -1,5 +1,0 @@
-layer=fully(2, 1, elu)
-layer=fully(1, 1, elu)
-layer=fully(1, 1, none)
-loss=mse
-opt=adam

@@ -3,12 +3,37 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
+#include <sstream>
 #include "Config.h"
 #include "layer/Layer.h"
 #include "opt/Optimizer.h"
 #include "Loss/Loss.h"
 #include "Callback/Callback.h"
 #include "BatchQueue.h"
+#include "layer/Fully_Connected.h"
+#include "activation/ELU.h"
+
+std::string ReplaceAll(std::string &str, const std::string& from, const std::string& to) {
+	size_t start_pos = 0; //string처음부터 검사
+	while ((start_pos = str.find(from, start_pos)) != std::string::npos)  //from을 찾을 수 없을 때까지
+	{
+		str.replace(start_pos, from.length(), to);
+		start_pos += to.length(); // 중복검사를 피하고 from.length() > to.length()인 경우를 위해서
+	}
+	return str;
+}
+
+vector<string> tokenize_getline(const string& data, const char delimiter = ' ') {
+	vector<string> result;
+	string token;
+	stringstream ss(data);
+
+	while (getline(ss, token, delimiter)) {
+		result.push_back(token);
+	}
+	return result;
+}
 
 namespace EinsNN
 {
@@ -115,8 +140,59 @@ namespace EinsNN
 		*/
 		void save(string path)
 		{
-			for (auto layer : m_layers)
+			ofstream stream(path);
+			if (stream.is_open())
 			{
+				for (auto layer : m_layers)
+				{
+					string name = layer->get_name();
+					vector<string> hiper = layer->get_hiper_param();
+					string weights = layer->get_weight();
+
+					ReplaceAll(weights, "\n", "\\n");
+
+					string strHiper;
+					for (auto item : hiper)
+					{
+						strHiper += item + ", ";
+					}
+					strHiper.resize(strHiper.size() - 2);
+					string strSave = "Layer=" + name + "(" + strHiper + ")" + 
+						"{" + weights + "}";
+
+					stream << strSave << endl;
+				}
+			}
+			stream.close();
+		}
+
+		/**
+		* @brief 저장된 파일에서 모델을 읽어온다.
+		*/
+		void load(string path)
+		{
+			this->~Model();
+			ifstream stream(path);
+			if (stream.is_open())
+			{
+				string line;
+				while (getline(stream, line))    //파일 끝까지 읽었는지 확인
+				{
+					string name, weights;
+					vector<string> hiper;
+					layer_parser(line, name, hiper, weights);
+
+					if (name == "Fully")
+					{
+						Fully_connected* fully = new Fully_connected(atoi(hiper[0].c_str()), 
+							atoi(hiper[1].c_str()), new ELU());
+						m_layers.push_back(fully);
+					}
+
+
+				}
+
+
 
 			}
 		}
@@ -178,6 +254,25 @@ namespace EinsNN
 					throw std::invalid_argument("Unit sizes does not match");
 				}
 			}
+		}
+
+		bool layer_parser(const string& strLayer, string& name, 
+			vector<string>& hipers, string& weights)
+		{
+			vector<string> one = tokenize_getline(strLayer, '=');
+			
+			string::size_type split_l = one[1].find("(");
+			string::size_type split_r = one[1].find(")");
+
+			name = one[1].substr(0, split_l);
+			string strHipers = one[1].substr(split_l + 1, split_r - split_l - 1);
+
+			hipers = tokenize_getline(strHipers, ',');
+
+			split_l = one[1].find("{");
+			split_r = one[1].find("}");
+			weights = one[1].substr(split_l + 1, split_r - 1);
+			return true;
 		}
 	};
 }
