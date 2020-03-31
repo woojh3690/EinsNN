@@ -19,7 +19,7 @@ namespace EinsNN
 		Layer(const int in_size, const int out_size) :
 			m_in_size(in_size), m_out_size(out_size)
 		{}
-		~Layer() {}
+		virtual ~Layer() {}
 
 		int in_size() const
 		{

@@ -20,7 +20,7 @@ namespace EinsNN
 			const double learning_rate = 0.001, 
 			const double beta1 = 0.9, 
 			const double beta2 = 0.999, 
-			const double epsilon = 1e-7, 
+			const double epsilon = 1e-6, 
 			const string name = "Adam") :
 			Optimizer(learning_rate, name)
 		{
@@ -48,14 +48,12 @@ namespace EinsNN
 
 			if (mvec.shape() == vector<int>())
 			{
-				mvec.resize(dvec.shape());
-				mvec.fill(1);
+				mvec = TensorD(dvec.shape(), 0);
 			}
 
 			if (vvec.shape() == vector<int>())
 			{
-				vvec.resize(dvec.shape());
-				vvec.fill(1);
+				vvec = TensorD(dvec.shape(), 0);
 			}
 
 			mvec = m_beta1 * mvec + (1 - m_beta1) * dvec;

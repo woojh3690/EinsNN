@@ -40,7 +40,7 @@ int main()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 100, 300, callback);
+	model.fit(x, y, 4, 300, callback);
 
 	// 학습된 모델 평가
 	Tensor<double> y_pred = model.predict(x);

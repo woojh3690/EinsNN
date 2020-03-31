@@ -5,7 +5,7 @@
 
 namespace EinsNN
 {
-	typedef Tensor<double> TensorD;
+	typedef Matrix::Tensor<double> TensorD;
 }
 
 #endif // !_EINSNN_CONFIG_H_

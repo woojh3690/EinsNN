@@ -19,9 +19,9 @@ namespace EinsNN
 		~Model() 
 		{
 			for (auto layer : m_layers)
+			{
 				delete layer;
-			delete m_opt;
-			delete m_loss;
+			}
 		}
 
 	public:
@@ -108,6 +108,17 @@ namespace EinsNN
 		Loss& get_loss() const
 		{
 			return *m_loss;
+		}
+
+		/**
+		* @brief 모델 구성과 파라미터들을 저장하는 함수
+		*/
+		void save(string path)
+		{
+			for (auto layer : m_layers)
+			{
+
+			}
 		}
 
 	private:

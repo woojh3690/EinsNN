@@ -12,7 +12,7 @@ namespace EinsNN
 
 	public:
 		Loss() {}
-		~Loss() {}
+		virtual ~Loss() {}
 
 	public:
 		virtual void evaluate(const TensorD& y_hat, const TensorD& target) = 0;

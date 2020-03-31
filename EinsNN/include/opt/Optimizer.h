@@ -16,7 +16,7 @@ namespace EinsNN
 		Optimizer(const double learning_rate, const string name):
 			m_lrate(learning_rate), m_name(name)
 		{}
-		~Optimizer() {};
+		virtual ~Optimizer() {}
 
 	public:
 		void set_Learning_Rate(double learning_rate)
