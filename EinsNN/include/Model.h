@@ -7,14 +7,31 @@
 #include <sstream>
 #include "Config.h"
 #include "layer/Layer.h"
-#include "opt/Optimizer.h"
 #include "Loss/Loss.h"
 #include "Callback/Callback.h"
+#include "opt/Optimizer.h"
 #include "BatchQueue.h"
-#include "layer/Fully_Connected.h"
-#include "activation/ELU.h"
+#include "Selector.h"
 
-std::string ReplaceAll(std::string &str, const std::string& from, const std::string& to) {
+#define TRIM_SPACE " \t\n"
+
+namespace ospace {
+	inline std::string trim(std::string& s, const std::string& drop = TRIM_SPACE)
+	{
+		std::string r = s.erase(s.find_last_not_of(drop) + 1);
+		return r.erase(0, r.find_first_not_of(drop));
+	}
+	inline std::string rtrim(std::string s, const std::string& drop = TRIM_SPACE)
+	{
+		return s.erase(s.find_last_not_of(drop) + 1);
+	}
+	inline std::string ltrim(std::string s, const std::string& drop = TRIM_SPACE)
+	{
+		return s.erase(0, s.find_first_not_of(drop));
+	}
+
+}
+static std::string ReplaceAll(std::string &str, const std::string& from, const std::string& to) {
 	size_t start_pos = 0; //string처음부터 검사
 	while ((start_pos = str.find(from, start_pos)) != std::string::npos)  //from을 찾을 수 없을 때까지
 	{
@@ -24,13 +41,13 @@ std::string ReplaceAll(std::string &str, const std::string& from, const std::str
 	return str;
 }
 
-vector<string> tokenize_getline(const string& data, const char delimiter = ' ') {
+static vector<string> tokenize_getline(const string& data, const char delimiter = ' ') {
 	vector<string> result;
 	string token;
 	stringstream ss(data);
 
 	while (getline(ss, token, delimiter)) {
-		result.push_back(token);
+		result.push_back(ospace::trim(token));
 	}
 	return result;
 }
@@ -173,25 +190,32 @@ namespace EinsNN
 		{
 			this->~Model();
 			ifstream stream(path);
-			if (stream.is_open())
+			if (!stream.is_open())
 			{
-				string line;
-				while (getline(stream, line))    //파일 끝까지 읽었는지 확인
+				throw runtime_error("Save file not found.");
+			}
+
+			string line;
+			while (getline(stream, line))    //파일 끝까지 읽었는지 확인
+			{
+				string modelType;
+				string type, weights;
+				vector<string> hipers;
+				line_parser(line, modelType, type, hipers, weights);
+
+				if (modelType == "Layer")
 				{
-					string name, weights;
-					vector<string> hiper;
-					layer_parser(line, name, hiper, weights);
-
-					if (name == "Fully")
-					{
-						Fully_connected* fully = new Fully_connected(atoi(hiper[0].c_str()), 
-							atoi(hiper[1].c_str()), new ELU());
-						m_layers.push_back(fully);
-					}
-
+					Layer* layer = Selector::selectLayer(type, hipers, weights);
+					m_layers.push_back(layer);
+				}
+				else if (modelType == "opt")
+				{
 
 				}
+				else if (modelType == "loss")
+				{
 
+				}
 
 
 			}
@@ -256,22 +280,23 @@ namespace EinsNN
 			}
 		}
 
-		bool layer_parser(const string& strLayer, string& name, 
+		bool line_parser(string& strLayer, string& modelType, string& type,
 			vector<string>& hipers, string& weights)
 		{
-			vector<string> one = tokenize_getline(strLayer, '=');
+			vector<string> token = tokenize_getline(strLayer, '=');
+			modelType = token[0];
 			
-			string::size_type split_l = one[1].find("(");
-			string::size_type split_r = one[1].find(")");
+			string::size_type split_l = token[1].find("(");
+			string::size_type split_r = token[1].find(")");
 
-			name = one[1].substr(0, split_l);
-			string strHipers = one[1].substr(split_l + 1, split_r - split_l - 1);
+			type = token[1].substr(0, split_l);
+			string strHipers = token[1].substr(split_l + 1, split_r - split_l - 1);
 
 			hipers = tokenize_getline(strHipers, ',');
 
-			split_l = one[1].find("{");
-			split_r = one[1].find("}");
-			weights = one[1].substr(split_l + 1, split_r - 1);
+			split_l = token[1].find("{");
+			split_r = token[1].find("}");
+			weights = token[1].substr(split_l + 1, split_r - split_l-1);
 			return true;
 		}
 	};
