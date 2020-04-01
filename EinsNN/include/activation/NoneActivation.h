@@ -1,5 +1,5 @@
 #ifndef _EINSNN_NONEACTIVATION_H_
-#define _EINSNN_NONEACTIVATION_H_
+#define _EINSNN_NONEACTIVATION_H_ "None"
 
 #include "Activation.h"
 
@@ -8,9 +8,8 @@ namespace EinsNN
 	class NoneActivation : public Activation
 	{
 	public:
-		NoneActivation() : Activation("None")
+		NoneActivation() : Activation(_EINSNN_NONEACTIVATION_H_)
 		{}
-		~NoneActivation() {};
 
 	public:
 		TensorD activate(const TensorD& Z) override 

@@ -9,12 +9,10 @@ namespace EinsNN
 	class Activation
 	{
 	protected:
-		std::string name = "None";
+		std::string type = "None";
 	public:
-		Activation() {};
 		Activation(string name) : 
-			name(name) {}
-		~Activation() {};
+			type(name) {}
 
 	public:
 		virtual TensorD activate(const TensorD& Z) = 0;
@@ -31,7 +29,7 @@ namespace EinsNN
 
 		std::string return_type()
 		{
-			return name;
+			return type;
 		}
 	};
 }

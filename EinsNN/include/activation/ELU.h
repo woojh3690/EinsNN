@@ -1,5 +1,5 @@
 ﻿#ifndef _EINSNN_ELU_H_
-#define _EINSNN_ELU_H_
+#define _EINSNN_ELU_H_ "ELU"
 
 #include <string>
 #include "../Config.h"
@@ -10,9 +10,8 @@ namespace EinsNN
 	class ELU : public Activation
 	{
 	public:
-		ELU() : Activation("ELU")
+		ELU() : Activation(_EINSNN_ELU_H_)
 		{}
-		~ELU() {}
 
 	public:
 		TensorD activate(const TensorD& Z) override
