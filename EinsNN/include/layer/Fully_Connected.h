@@ -1,5 +1,5 @@
 ﻿#ifndef EINSNN_FULLY_CONNECTED_H_
-#define EINSNN_FULLY_CONNECTED_H_
+#define EINSNN_FULLY_CONNECTED_H_ "Fully"
 
 #include "Layer.h"
 #include "../Config.h"
@@ -75,7 +75,7 @@ namespace EinsNN
 
 		string get_name() override
 		{
-			return "Fully";
+			return EINSNN_FULLY_CONNECTED_H_;
 		}
 
 		vector<string> get_hiper_param() override
@@ -90,6 +90,19 @@ namespace EinsNN
 		string get_weight() override
 		{
 			return m_W.toString() + m_b.toString();
+		}
+
+		void set_weight(const string& weights) override
+		{
+			string::size_type idx = weights.find("][");
+			if (idx == string::npos)
+				throw invalid_argument("Save file is broken.");
+
+			string strTsr_W = weights.substr(0, idx + 1);
+			string strTsr_b = weights.substr(idx + 1, weights.size() - idx + 1);
+
+			m_W.loadFromString(strTsr_W);
+			m_b.loadFromString(strTsr_b);
 		}
 
 	};

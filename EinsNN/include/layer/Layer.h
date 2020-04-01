@@ -18,6 +18,7 @@ namespace EinsNN
 		TensorD m_din; // 레이어의 도함수
 
 	public:
+
 		Layer(const int in_size, const int out_size) :
 			m_in_size(in_size), m_out_size(out_size)
 		{}
@@ -65,6 +66,7 @@ namespace EinsNN
 		virtual vector<string> get_hiper_param() = 0;
 
 		virtual string get_weight() = 0;
+		virtual void set_weight(const string& weights) = 0;
 
 	};
 } //namespace EinsNN
