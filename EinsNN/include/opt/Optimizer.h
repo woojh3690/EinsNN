@@ -24,6 +24,13 @@ namespace EinsNN
 			m_lrate = learning_rate;
 		}
 
+		string get_type()
+		{
+			return m_name;
+		}
+		
+		virtual vector<string> get_hiper_param() = 0;
+
 		virtual void update(TensorD& derivative, TensorD& tenosr) = 0;
 	};
 }
