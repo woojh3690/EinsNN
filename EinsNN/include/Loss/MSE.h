@@ -1,5 +1,5 @@
 #ifndef _EINSNN_MSE_H_
-#define _EINSNN_MSE_H_
+#define _EINSNN_MSE_H_ "MSE"
 
 #include "Loss.h"
 namespace EinsNN
@@ -7,7 +7,7 @@ namespace EinsNN
 	class MSE : public Loss
 	{
 	public:
-		MSE() : Loss() {}
+		MSE() : Loss(_EINSNN_MSE_H_) {}
 		~MSE() {}
 
 	public:

@@ -1,6 +1,7 @@
 #ifndef _EINSNN_LOSSLAYER_H_
 #define _EINSNN_LOSSLAYER_H_
 
+#include <string>
 #include "../Config.h"
 
 namespace EinsNN
@@ -9,10 +10,17 @@ namespace EinsNN
 	{
 	protected:
 		TensorD m_din; // 레이어의 도함수
+		std::string m_type;
 
 	public:
-		Loss() {}
+		Loss(std::string type) : m_type(type){}
 		virtual ~Loss() {}
+
+	public:
+		std::string get_type()
+		{
+			return m_type;
+		}
 
 	public:
 		virtual void evaluate(const TensorD& y_hat, const TensorD& target) = 0;
