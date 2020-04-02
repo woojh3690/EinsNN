@@ -37,7 +37,7 @@ int main()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 4, 50, callback);
+	model.fit(x, y, 4, callback, 50);
 
 	// 학습된 모델 평가
 	Matrix::Tensor<double> y_pred = model.predict(x);
