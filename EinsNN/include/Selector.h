@@ -7,6 +7,7 @@
 #include "activation/Activation.h"
 #include "activation/NoneActivation.h"
 #include "activation/ELU.h"
+#include "activation/ReLU.h"
 
 #include "Loss/Loss.h"
 #include "Loss/MSE.h"
@@ -40,10 +41,12 @@ namespace EinsNN
 
 				// 활성화 함수 선택
 				Activation* act = nullptr;
-				if (actType == _EINSNN_ELU_H_)
-					act = new ELU();
-				else if (actType == _EINSNN_NONEACTIVATION_H_)
+				if (actType == _EINSNN_NONEACTIVATION_H_)
 					act = new NoneActivation();
+				else if (actType == _EINSNN_ELU_H_)
+					act = new ELU();
+				else if (actType == _EINSNN_RELU_H_)
+					act = new ReLU();
 				else
 					throw invalid_argument("Save file is broken.");
 

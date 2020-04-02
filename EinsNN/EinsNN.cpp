@@ -3,6 +3,7 @@
 #include "include/layer/Fully_Connected.h"
 #include "include/opt/AdamOptimizer.h"
 #include "include/activation/ELU.h"
+#include "include/activation/ReLU.h"
 #include "include/Loss/MSE.h"
 #include "include/Callback/VerboseCallback.h"
 using namespace EinsNN;
@@ -10,7 +11,8 @@ using namespace EinsNN;
 int main()
 {
 	Model model;
-	model.set_layer(new Fully_connected(2, 2, new ELU()));
+	model.set_layer(new Fully_connected(2, 2, new ReLU()));
+	model.set_layer(new Fully_connected(2, 2, new ReLU()));
 	model.set_layer(new Fully_connected(2, 1));
 
 	AdamOptimizer adam(0.02);
