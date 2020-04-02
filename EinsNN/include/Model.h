@@ -64,6 +64,23 @@ namespace EinsNN
 			{
 				delete layer;
 			}
+
+
+			if (m_opt != NULL)
+			{
+				if (!m_opt->get_type().empty())
+				{
+					delete m_opt;
+				}
+			}
+
+			if (m_loss != NULL)
+			{
+				if (!m_loss->get_type().empty())
+				{
+					delete m_loss;
+				}
+			}
 		}
 
 	public:
@@ -158,28 +175,38 @@ namespace EinsNN
 		void save(string path)
 		{
 			ofstream stream(path);
-			if (stream.is_open())
+			if (!stream.is_open())
+				throw runtime_error("Can not open " + path);
+
+			// layers
+			for (auto layer : m_layers)
 			{
-				for (auto layer : m_layers)
-				{
-					string name = layer->get_name();
-					vector<string> hiper = layer->get_hiper_param();
-					string weights = layer->get_weight();
+				string type = layer->get_type();
 
-					ReplaceAll(weights, "\n", "\\n");
+				string strHiper;
+				for (auto item : layer->get_hiper_param())
+					strHiper += item + ", ";
+				strHiper.resize(strHiper.size() - 2);
 
-					string strHiper;
-					for (auto item : hiper)
-					{
-						strHiper += item + ", ";
-					}
-					strHiper.resize(strHiper.size() - 2);
-					string strSave = "Layer=" + name + "(" + strHiper + ")" + 
-						"{" + weights + "}";
+				string weights = layer->get_weight();
+				ReplaceAll(weights, "\n", "\\n");
 
-					stream << strSave << endl;
-				}
+				string strSave = "Layer="+type+"("+strHiper+")"+"{"+weights+"}";
+				stream << strSave << endl;
 			}
+
+			//loss
+			stream << "Loss=" + m_loss->get_type() << endl;
+
+			// opt
+			string name = m_opt->get_type();
+			string strHiper;
+			for (auto item : m_opt->get_hiper_param())
+				strHiper += item + ", ";
+			strHiper.resize(strHiper.size() - 2);
+
+			stream << "Opt=" + name + "(" + strHiper + ")" << endl;
+
 			stream.close();
 		}
 
@@ -191,9 +218,7 @@ namespace EinsNN
 			this->~Model();
 			ifstream stream(path);
 			if (!stream.is_open())
-			{
 				throw runtime_error("Save file not found.");
-			}
 
 			string line;
 			while (getline(stream, line))    //파일 끝까지 읽었는지 확인
@@ -208,17 +233,16 @@ namespace EinsNN
 					Layer* layer = Selector::selectLayer(type, hipers, weights);
 					m_layers.push_back(layer);
 				}
-				else if (modelType == "opt")
+				else if (modelType == "Loss")
 				{
-
+					m_loss = Selector::selectLoss(type);
 				}
-				else if (modelType == "loss")
+				else if (modelType == "Opt")
 				{
-
+					m_opt = Selector::selectOpt(type, hipers);
 				}
-
-
 			}
+			stream.close();
 		}
 
 	private:

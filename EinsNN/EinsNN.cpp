@@ -6,6 +6,7 @@
 #include "include/Loss/MSE.h"
 #include "include/Callback/VerboseCallback.h"
 
+#include <crtdbg.h>
 using namespace EinsNN;
 
 int main()
@@ -46,6 +47,14 @@ int main()
 	double eval_loss = new_mse.loss().value();
 	string path = "./save-1.txt";
 	model.save(path);
-	model.load(path);
+
+
+	Model new_model;
+	new_model.load(path);
+
+	Matrix::Tensor<double> new_y_pred = new_model.predict(x);
+	new_model.set_layer(new Fully_connected(1, 3, new ELU()));
+
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
