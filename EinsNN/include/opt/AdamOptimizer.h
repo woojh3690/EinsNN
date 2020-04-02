@@ -1,5 +1,5 @@
-﻿#ifndef EINSNN_ADAM_OPTIMIZER_H_
-#define EINSNN_ADAM_OPTIMIZER_H_
+﻿#ifndef _EINSNN_ADAM_OPTIMIZER_H_
+#define _EINSNN_ADAM_OPTIMIZER_H_ "Adam"
 
 #include "Optimizer.h"
 #include <Tensor.h>
@@ -20,9 +20,8 @@ namespace EinsNN
 			const double learning_rate = 0.001, 
 			const double beta1 = 0.9, 
 			const double beta2 = 0.999, 
-			const double epsilon = 1e-6, 
-			const string name = "Adam") :
-			Optimizer(learning_rate, name)
+			const double epsilon = 1e-6) :
+			Optimizer(learning_rate, _EINSNN_ADAM_OPTIMIZER_H_)
 		{
 			init(beta1, beta2, epsilon);
 		}
@@ -67,6 +66,15 @@ namespace EinsNN
 			m_beta1t = m_beta1t * m_beta1;
 			m_beta2t = m_beta2t * m_beta2;
 		}
+
+		vector<string> get_hiper_param() override
+		{
+			vector<string> param;
+			param.push_back(to_string(m_beta1));
+			param.push_back(to_string(m_beta2));
+			param.push_back(to_string(m_epsilon));
+			return param;
+		}
 	};
 }
-#endif // !EINSNN_ADAM_OPTIMIZER_H_
+#endif // !_EINSNN_ADAM_OPTIMIZER_H_
