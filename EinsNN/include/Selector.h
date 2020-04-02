@@ -53,9 +53,24 @@ namespace EinsNN
 			}
 		}
 
-		static Optimizer* selectOpt(string type, vector<string> hipers, string weights)
+		static Loss* selectLoss(string type)
 		{
+			if (type == _EINSNN_MSE_H_)
+			{
+				return new MSE();
+			}
+		}
 
+		static Optimizer* selectOpt(string type, vector<string> hipers)
+		{
+			if (type == _EINSNN_ADAM_OPTIMIZER_H_)
+			{
+				double beta1 = stod(hipers[0]);
+				double beta2 = stod(hipers[1]);
+				double epsilon = stod(hipers[2]);
+
+				return new AdamOptimizer(beta1, beta2, epsilon);
+			}
 		}
 	};
 }
