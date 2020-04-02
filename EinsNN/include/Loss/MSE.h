@@ -20,7 +20,7 @@ namespace EinsNN
 
 		TensorD loss() override
 		{
-			return (m_din.pow().mean())[0];
+			return (m_din.pow().mean() / 2)[0];
 		}
 
 		TensorD& back_data() override

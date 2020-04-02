@@ -108,8 +108,8 @@ namespace EinsNN
 			}
 		}
 
-		void fit(const TensorD& x, const TensorD& y, const int batch_size, 
-			int epoche, Callback& callback)
+		void fit(const TensorD& x, const TensorD& y, const int& batch_size,
+			Callback& callback, const int& epoche, const double& scale = -1)
 		{
 			init();
 
@@ -120,25 +120,30 @@ namespace EinsNN
 			// 학습
 			TensorD batch_x;
 			TensorD batch_y;
-			double global_loss;
-			int batch_count;
 			for (int i = 0; i < epoche; i++)
 			{
+				//callback
 				callback.pre_traning(i, batch_x, batch_y);
 
 				// 배치 학습
-				global_loss = 0;
-				batch_count = 0;
 				queue.move_cursor_front();
 				while (queue.next(&batch_x, &batch_y, batch_size))
 				{
 					this->forward(batch_x);
 					this->backprop(batch_x, batch_y);
 					this->update();
-					global_loss += m_loss->loss().value();
-					batch_count++;
 				}
-				callback.post_traning(global_loss / batch_count, i, batch_x, batch_y);
+
+				// 글로벌 로스 계산
+				this->forward(x);
+				m_loss->evaluate(m_layers.back()->output(), y);
+				double global_loss = m_loss->loss().value();
+
+				// callback
+				callback.post_traning(global_loss, i, batch_x, batch_y);
+
+				if (global_loss < scale)
+					break;
 			}
 		}
 
