@@ -73,7 +73,7 @@ namespace EinsNN
 			return m_din;
 		}
 
-		string get_name() override
+		string get_type() override
 		{
 			return EINSNN_FULLY_CONNECTED_H_;
 		}

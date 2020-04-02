@@ -61,7 +61,7 @@ namespace EinsNN
 
 		virtual TensorD back_data() = 0;
 
-		virtual string get_name() = 0;
+		virtual string get_type() = 0;
 
 		virtual vector<string> get_hiper_param() = 0;
 
