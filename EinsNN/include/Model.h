@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include <sstream>
 #include "Config.h"
 #include "layer/Layer.h"
 #include "Loss/Loss.h"
@@ -12,45 +11,7 @@
 #include "opt/Optimizer.h"
 #include "BatchQueue.h"
 #include "Selector.h"
-
-#define TRIM_SPACE " \t\n"
-
-namespace ospace {
-	inline std::string trim(std::string& s, const std::string& drop = TRIM_SPACE)
-	{
-		std::string r = s.erase(s.find_last_not_of(drop) + 1);
-		return r.erase(0, r.find_first_not_of(drop));
-	}
-	inline std::string rtrim(std::string s, const std::string& drop = TRIM_SPACE)
-	{
-		return s.erase(s.find_last_not_of(drop) + 1);
-	}
-	inline std::string ltrim(std::string s, const std::string& drop = TRIM_SPACE)
-	{
-		return s.erase(0, s.find_first_not_of(drop));
-	}
-
-}
-static std::string ReplaceAll(std::string &str, const std::string& from, const std::string& to) {
-	size_t start_pos = 0; //string처음부터 검사
-	while ((start_pos = str.find(from, start_pos)) != std::string::npos)  //from을 찾을 수 없을 때까지
-	{
-		str.replace(start_pos, from.length(), to);
-		start_pos += to.length(); // 중복검사를 피하고 from.length() > to.length()인 경우를 위해서
-	}
-	return str;
-}
-
-static vector<string> tokenize_getline(const string& data, const char delimiter = ' ') {
-	vector<string> result;
-	string token;
-	stringstream ss(data);
-
-	while (getline(ss, token, delimiter)) {
-		result.push_back(ospace::trim(token));
-	}
-	return result;
-}
+#include "Parser.h"
 
 namespace EinsNN
 {
