@@ -1,6 +1,8 @@
 ﻿#ifndef EINSNN_FULLY_CONNECTED_H_
 #define EINSNN_FULLY_CONNECTED_H_ "Fully"
 
+#include <string>
+#include <vector>
 #include "Layer.h"
 #include "../Config.h"
 #include "../activation/Activation.h"
@@ -28,6 +30,7 @@ namespace EinsNN
 		Fully_connected(const int input_size, const int output_size, Activation* activeFunc) :
 			Layer(input_size, output_size), m_activeFunc(activeFunc)
 		{}
+
 		~Fully_connected()
 		{
 			delete m_activeFunc;
