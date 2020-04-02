@@ -20,7 +20,7 @@ namespace EinsNN
 		{
 			char strPrint[100];
 			char strFormat[100] = "[Epoch %d] Loss : %lf";
-			std::sprintf(strPrint, strFormat, epoche, loss[0].value());
+			sprintf_s(strPrint, strFormat, epoche, loss[0].value());
 			std::cout << strPrint << std::endl;
 		}
 	};
