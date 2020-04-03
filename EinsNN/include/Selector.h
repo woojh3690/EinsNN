@@ -68,11 +68,13 @@ namespace EinsNN
 		{
 			if (type == _EINSNN_ADAM_OPTIMIZER_H_)
 			{
-				double beta1 = stod(hipers[0]);
-				double beta2 = stod(hipers[1]);
-				double epsilon = stod(hipers[2]);
+				double lrate = stod(hipers[0]);
+				double beta1 = stod(hipers[1]);
+				double beta2 = stod(hipers[2]);
+				double epsilon = stod(hipers[3]);
 
-				return new AdamOptimizer(beta1, beta2, epsilon);
+
+				return new AdamOptimizer(lrate, beta1, beta2, epsilon);
 			}
 		}
 	};
