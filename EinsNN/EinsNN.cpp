@@ -6,9 +6,10 @@
 #include "include/activation/ReLU.h"
 #include "include/Loss/MSE.h"
 #include "include/Callback/VerboseCallback.h"
+#include <crtdbg.h>
 using namespace EinsNN;
 
-int main()
+void memory_leak_test()
 {
 	Model model;
 	model.set_layer(new Fully_connected(2, 2, new ReLU()));
@@ -52,6 +53,13 @@ int main()
 	new_model.load(path);
 
 	Matrix::Tensor<double> new_y_pred = new_model.predict(x);
+}
 
+int main()
+{
+	//_CrtSetBreakAlloc(3773);
+	memory_leak_test();
+
+	//_CrtDumpMemoryLeaks();
 	return 0;
 }

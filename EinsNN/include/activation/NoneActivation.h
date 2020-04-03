@@ -14,8 +14,7 @@ namespace EinsNN
 	public:
 		TensorD activate(const TensorD& Z) override 
 		{
-			TensorD* newZ = new TensorD(Z);
-			return *newZ;
+			return Z;
 		}
 
 		TensorD apply_jacobian(const TensorD& Z, const TensorD& A, 
