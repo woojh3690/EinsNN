@@ -4,12 +4,13 @@
 #include <vector>
 #include <string>
 #include <fstream>
+
 #include "Config.h"
+#include "BatchQueue.h"
 #include "layer/Layer.h"
 #include "Loss/Loss.h"
-#include "Callback/Callback.h"
 #include "opt/Optimizer.h"
-#include "BatchQueue.h"
+#include "Callback/Callback.h"
 #include "Selector.h"
 #include "Parser.h"
 
