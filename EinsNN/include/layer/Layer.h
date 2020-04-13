@@ -13,13 +13,13 @@ namespace EinsNN
 	{
 	protected:
 		// i/o 정의 -1이라면 자유
-		int m_in_size; // 레이어 입력 데이터 사이즈.
-		int m_out_size; // 레이어 출력 데이터 사이즈
+		size_t m_in_size; // 레이어 입력 데이터 사이즈.
+		size_t m_out_size; // 레이어 출력 데이터 사이즈
 		TensorD m_din; // 레이어의 도함수
 
 	public:
 
-		Layer(const int in_size, const int out_size) :
+		Layer(const size_t in_size, const size_t out_size) :
 			m_in_size(in_size), m_out_size(out_size)
 		{}
 		virtual ~Layer() {}
