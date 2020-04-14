@@ -38,10 +38,10 @@ void memory_leak_test()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 4, callback, 50);
+	model.fit(x, y, 4, callback, 1000);
 
 	// 학습된 모델 평가
-	Matrix::Tensor<double> y_pred = model.predict(x);
+	TensorD y_pred = model.predict(x);
 
 	string path = "./save-1.txt";
 
@@ -52,7 +52,7 @@ void memory_leak_test()
 	Model new_model;
 	new_model.load(path);
 
-	Matrix::Tensor<double> new_y_pred = new_model.predict(x);
+	TensorD new_y_pred = new_model.predict(x);
 }
 
 int main()

@@ -20,7 +20,7 @@ namespace EinsNN
 
 		TensorD loss() override
 		{
-			return (m_din.pow().mean() / 2)[0];
+			return m_din.pow().mean() / 2;
 		}
 
 		TensorD& back_data() override
@@ -31,8 +31,8 @@ namespace EinsNN
 	private:
 		void checkData(const TensorD& y_hat, const TensorD& target)
 		{
-			vector<size_t> y_hat_shape = y_hat.shape();
-			vector<size_t> target_shape = target.shape();
+			vector<int> y_hat_shape = y_hat.shape();
+			vector<int> target_shape = target.shape();
 
 			if (y_hat_shape.size() != 2 || target_shape.size() != 2)
 			{

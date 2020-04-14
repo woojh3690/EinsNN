@@ -37,15 +37,14 @@ namespace EinsNN
 			shuffle_y = y;
 
 			std::srand(seed);
+#pragma omp parallel for
 			for (int i = 0; i < m_size; i++)
 			{
-				int left = random_num(0, m_size - 1);
-				int right = random_num(0, m_size - 1);
-
-				if (left != right)
-				{
-					change(&shuffle_x, &shuffle_y, left, right);
-				}
+				change(
+					shuffle_x, shuffle_y, 
+					random_num(0, m_size - 1), 
+					random_num(0, m_size - 1)
+				);
 			}
 		}
 
@@ -57,8 +56,8 @@ namespace EinsNN
 			}
 
 			bool exist_next = true;
-			x->~Tensor();
-			y->~Tensor();
+			x->clear();
+			y->clear();
 
 			for (int i = 0; i < batch_size; i++)
 			{
@@ -85,10 +84,16 @@ namespace EinsNN
 			return rand() % (max - min + 1) + min;
 		}
 
-		void change(TensorD* x, TensorD* y, int left, int right)
+		void change(TensorD& x, TensorD& y, int left, int right)
 		{
-			std::swap(x->operator[](left), x->operator[](right));
-			std::swap(y->operator[](left), y->operator[](right));
+			TensorD temp;
+			temp = x[left];
+			x[left] = x[right];
+			x[right] = temp;
+
+			temp = y[left];
+			y[left] = y[right];
+			y[right] = temp;
 		}
 	};
 }

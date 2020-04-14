@@ -45,12 +45,12 @@ namespace EinsNN
 			TensorD& mvec = m_hist_m[&dvec];
 			TensorD& vvec = m_hist_v[&dvec];
 
-			if (mvec.shape() == vector<size_t>())
+			if (mvec.shape() == vector<int>({ 0 }))
 			{
 				mvec = TensorD(dvec.shape(), 0);
 			}
 
-			if (vvec.shape() == vector<size_t>())
+			if (vvec.shape() == vector<int>({ 0 }))
 			{
 				vvec = TensorD(dvec.shape(), 0);
 			}

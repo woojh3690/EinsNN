@@ -96,7 +96,7 @@ namespace EinsNN
 					this->update();
 				}
 
-				// 글로벌 로스 계산
+				// global loss 계산
 				this->forward(x);
 				m_loss->evaluate(m_layers.back()->output(), y);
 				double global_loss = m_loss->loss().value();
@@ -156,7 +156,6 @@ namespace EinsNN
 				strHiper.resize(strHiper.size() - 2);
 
 				string weights = layer->get_weight();
-				ReplaceAll(weights, "\n", "\\n");
 
 				string strSave = "Layer="+type+"("+strHiper+")"+"{"+weights+"}";
 				stream << strSave << endl;
@@ -240,7 +239,7 @@ namespace EinsNN
 				back_data = m_layers[i]->back_data();
 			}
 
-			// 첫번째 히든레이어 역전파 계산
+	                                                                                                                                                                   		// 첫번째 히든레이어 역전파 계산
 			m_layers.front()->backprop(input, m_layers[1]->back_data());
 		}
 
