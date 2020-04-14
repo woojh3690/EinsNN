@@ -54,6 +54,10 @@ namespace EinsNN
 				fully->set_weight(weights);
 				return fully;
 			}
+			else
+			{
+				throw invalid_argument("Save file is broken.");
+			}
 		}
 
 		static Loss* selectLoss(string type)
@@ -61,6 +65,10 @@ namespace EinsNN
 			if (type == _EINSNN_MSE_H_)
 			{
 				return new MSE();
+			}
+			else
+			{
+				throw invalid_argument("Save file is broken.");
 			}
 		}
 
@@ -75,6 +83,10 @@ namespace EinsNN
 
 
 				return new AdamOptimizer(lrate, beta1, beta2, epsilon);
+			}
+			else
+			{
+				throw invalid_argument("Save file is broken.");
 			}
 		}
 	};
