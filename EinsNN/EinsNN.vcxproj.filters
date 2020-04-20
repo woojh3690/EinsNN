@@ -35,59 +35,59 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\EinsNN.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="include\opt\Optimizer.h">
       <Filter>헤더 파일\Opt</Filter>
-    </ClInclude>
-    <ClInclude Include="include\layer\Layer.h">
-      <Filter>헤더 파일\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="include\layer\Fully_Connected.h">
-      <Filter>헤더 파일\Layer</Filter>
     </ClInclude>
     <ClInclude Include="include\opt\AdamOptimizer.h">
       <Filter>헤더 파일\Opt</Filter>
     </ClInclude>
-    <ClInclude Include="include\activation\ELU.h">
-      <Filter>헤더 파일\Activation</Filter>
-    </ClInclude>
-    <ClInclude Include="include\activation\Activation.h">
-      <Filter>헤더 파일\Activation</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Config.h">
+    <ClInclude Include="include\batch_queue.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="include\activation\NoneActivation.h">
-      <Filter>헤더 파일\Activation</Filter>
+    <ClInclude Include="include\config.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="include\Loss\MSE.h">
+    <ClInclude Include="include\einsnn.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\model.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Loss\mse.h">
       <Filter>헤더 파일\Loss</Filter>
     </ClInclude>
-    <ClInclude Include="include\Loss\Loss.h">
+    <ClInclude Include="include\parser.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\selector.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Loss\loss.h">
       <Filter>헤더 파일\Loss</Filter>
     </ClInclude>
-    <ClInclude Include="include\Callback\Callback.h">
+    <ClInclude Include="include\layer\layer.h">
+      <Filter>헤더 파일\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\layer\fully_connected.h">
+      <Filter>헤더 파일\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Callback\verbose_callback.h">
       <Filter>헤더 파일\Callback</Filter>
     </ClInclude>
-    <ClInclude Include="include\Callback\VerboseCallback.h">
+    <ClInclude Include="include\Callback\callback.h">
       <Filter>헤더 파일\Callback</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BatchQueue.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Selector.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="include\activation\ReLU.h">
+    <ClInclude Include="include\activation\relu.h">
       <Filter>헤더 파일\Activation</Filter>
     </ClInclude>
-    <ClInclude Include="include\Parser.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="include\activation\none_activation.h">
+      <Filter>헤더 파일\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\activation\elu.h">
+      <Filter>헤더 파일\Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\activation\activation.h">
+      <Filter>헤더 파일\Activation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

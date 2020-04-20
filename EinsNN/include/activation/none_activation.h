@@ -1,7 +1,7 @@
 #ifndef _EINSNN_NONEACTIVATION_H_
 #define _EINSNN_NONEACTIVATION_H_ "None"
 
-#include "Activation.h"
+#include "activation.h"
 
 namespace EinsNN
 {

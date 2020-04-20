@@ -1,22 +1,20 @@
 ﻿#include <iostream>
-#include "include/EinsNN.h"
-#include "include/layer/Fully_Connected.h"
-#include "include/opt/AdamOptimizer.h"
-#include "include/activation/ELU.h"
-#include "include/activation/ReLU.h"
-#include "include/Loss/MSE.h"
-#include "include/Callback/VerboseCallback.h"
+#include "include/einsnn.h"
 #include <crtdbg.h>
+#include <omp.h>
 using namespace EinsNN;
 
 void memory_leak_test()
 {
+	clock_t start = clock();
+	omp_set_num_threads(4);
+
 	Model model;
-	model.set_layer(new Fully_connected(2, 2, new ReLU()));
-	model.set_layer(new Fully_connected(2, 2, new ReLU()));
+	model.set_layer(new Fully_connected(2, 2, new ELU()));
+	model.set_layer(new Fully_connected(2, 2, new ELU()));
 	model.set_layer(new Fully_connected(2, 1));
 
-	AdamOptimizer adam(0.02);
+	AdamOptimizer adam(0.01);
 	MSE mse;
 	model.compile(mse, adam);
 
@@ -38,7 +36,11 @@ void memory_leak_test()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 4, callback, 1000);
+	model.fit(x, y, 4, callback, 100, 0.0001);
+
+	// 학습 시간 출력
+	int takeTime = (clock() - start) / CLOCKS_PER_SEC;
+	std::cout << "Take time : " << takeTime << std::endl;
 
 	// 학습된 모델 평가
 	TensorD y_pred = model.predict(x);
@@ -60,6 +62,6 @@ int main()
 	//_CrtSetBreakAlloc(3773);
 	memory_leak_test();
 
-	//_CrtDumpMemoryLeaks();
+	bool leakCheck = _CrtDumpMemoryLeaks();
 	return 0;
 }

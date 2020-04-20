@@ -1,8 +1,8 @@
 #ifndef _EINSNN_CALLBACK_H_
 #define _EINSNN_CALLBACK_H_
 
-#include "../Config.h"
-#include "../EinsNN.h"
+#include "../config.h"
+#include "../einsnn.h"
 
 namespace EinsNN
 {

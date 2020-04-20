@@ -3,10 +3,10 @@
 
 #include <string>
 #include <vector>
-#include "Layer.h"
-#include "../Config.h"
-#include "../activation/Activation.h"
-#include "../activation/NoneActivation.h"
+#include "layer.h"
+#include "../config.h"
+#include "../activation/activation.h"
+#include "../activation/none_activation.h"
 
 namespace EinsNN
 {

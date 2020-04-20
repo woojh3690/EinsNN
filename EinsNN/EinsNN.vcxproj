@@ -66,8 +66,10 @@
       </OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <OpenMPSupport>false</OpenMPSupport>
+      <OpenMPSupport>true</OpenMPSupport>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -95,6 +97,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:twoPhase- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,24 +109,24 @@
     <ClCompile Include="EinsNN.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\activation\Activation.h" />
-    <ClInclude Include="include\activation\ELU.h" />
-    <ClInclude Include="include\activation\NoneActivation.h" />
-    <ClInclude Include="include\activation\ReLU.h" />
-    <ClInclude Include="include\BatchQueue.h" />
-    <ClInclude Include="include\Callback\Callback.h" />
-    <ClInclude Include="include\Callback\VerboseCallback.h" />
-    <ClInclude Include="include\Config.h" />
-    <ClInclude Include="include\EinsNN.h" />
-    <ClInclude Include="include\layer\Fully_Connected.h" />
-    <ClInclude Include="include\layer\Layer.h" />
-    <ClInclude Include="include\Loss\Loss.h" />
-    <ClInclude Include="include\Loss\MSE.h" />
-    <ClInclude Include="include\Model.h" />
+    <ClInclude Include="include\activation\activation.h" />
+    <ClInclude Include="include\activation\elu.h" />
+    <ClInclude Include="include\activation\none_activation.h" />
+    <ClInclude Include="include\activation\relu.h" />
+    <ClInclude Include="include\batch_queue.h" />
+    <ClInclude Include="include\Callback\callback.h" />
+    <ClInclude Include="include\Callback\verbose_callback.h" />
+    <ClInclude Include="include\config.h" />
+    <ClInclude Include="include\einsnn.h" />
+    <ClInclude Include="include\layer\fully_connected.h" />
+    <ClInclude Include="include\layer\layer.h" />
+    <ClInclude Include="include\Loss\loss.h" />
+    <ClInclude Include="include\Loss\mse.h" />
+    <ClInclude Include="include\model.h" />
     <ClInclude Include="include\opt\AdamOptimizer.h" />
     <ClInclude Include="include\opt\Optimizer.h" />
-    <ClInclude Include="include\Parser.h" />
-    <ClInclude Include="include\Selector.h" />
+    <ClInclude Include="include\parser.h" />
+    <ClInclude Include="include\selector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

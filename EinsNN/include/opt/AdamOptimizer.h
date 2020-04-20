@@ -1,7 +1,7 @@
 ﻿#ifndef _EINSNN_ADAM_OPTIMIZER_H_
 #define _EINSNN_ADAM_OPTIMIZER_H_ "Adam"
 
-#include "Optimizer.h"
+#include "optimizer.h"
 #include <Tensor.h>
 #include <unordered_map>
 

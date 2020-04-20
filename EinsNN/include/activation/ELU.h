@@ -2,8 +2,8 @@
 #define _EINSNN_ELU_H_ "ELU"
 
 #include <string>
-#include "../Config.h"
-#include "Activation.h"
+#include "../config.h"
+#include "activation.h"
 
 namespace EinsNN
 {

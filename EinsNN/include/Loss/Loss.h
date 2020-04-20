@@ -2,7 +2,7 @@
 #define _EINSNN_LOSSLAYER_H_
 
 #include <string>
-#include "../Config.h"
+#include "../config.h"
 
 namespace EinsNN
 {

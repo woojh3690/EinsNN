@@ -1,7 +1,7 @@
 ﻿#ifndef EINSNN_OPTIMIZER_H_
 #define EINSNN_OPTIMIZER_H_
 
-#include "../Config.h"
+#include "../config.h"
 #include <string>
 
 namespace EinsNN

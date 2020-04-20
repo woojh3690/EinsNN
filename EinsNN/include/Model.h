@@ -5,12 +5,12 @@
 #include <string>
 #include <fstream>
 
-#include "Config.h"
-#include "BatchQueue.h"
+#include "config.h"
+#include "batch_queue.h"
 #include "layer/Layer.h"
-#include "Loss/Loss.h"
-#include "opt/Optimizer.h"
-#include "Callback/Callback.h"
+#include "loss/loss.h"
+#include "opt/optimizer.h"
+#include "Callback/callback.h"
 #include "Selector.h"
 #include "Parser.h"
 

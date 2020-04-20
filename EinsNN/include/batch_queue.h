@@ -1,7 +1,7 @@
 #ifndef _EINSNN_BATCHQUEUE_H_
 #define _EINSNN_BATCHQUEUE_H_
 
-#include "Config.h"
+#include "config.h"
 #include <time.h>
 #include <algorithm>
 

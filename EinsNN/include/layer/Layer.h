@@ -2,8 +2,8 @@
 #ifndef EINSNN_LAYER_H_
 #define EINSNN_LAYER_H_
 
-#include "../Config.h"
-#include "../opt/Optimizer.h"
+#include "../config.h"
+#include "../opt/optimizer.h"
 #include <string>
 #include <vector>
 

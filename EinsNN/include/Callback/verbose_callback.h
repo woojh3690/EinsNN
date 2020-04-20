@@ -1,8 +1,8 @@
 #ifndef _EINSNN_VERBOSECALLBACK_H_
 #define _EINSNN_VERBOSECALLBACK_H_
 
-#include "Callback.h"
-#include "../EinsNN.h"
+#include "callback.h"
+#include "../einsnn.h"
 #include <iostream>
 
 namespace EinsNN

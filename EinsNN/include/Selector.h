@@ -4,19 +4,19 @@
 #include "layer/Layer.h" 
 #include "layer/Fully_Connected.h"
 
-#include "activation/Activation.h"
-#include "activation/NoneActivation.h"
-#include "activation/ELU.h"
-#include "activation/ReLU.h"
+#include "activation/activation.h"
+#include "activation/none_activation.h"
+#include "activation/elu.h"
+#include "activation/relu.h"
 
-#include "Loss/Loss.h"
-#include "Loss/MSE.h"
+#include "loss/loss.h"
+#include "loss/mse.h"
 
-#include "opt/Optimizer.h"
+#include "opt/optimizer.h"
 #include "opt/AdamOptimizer.h"
 
-#include "Callback/Callback.h"
-#include "Callback/VerboseCallback.h"
+#include "Callback/callback.h"
+#include "Callback/verbose_callback.h"
 
 namespace EinsNN
 {
