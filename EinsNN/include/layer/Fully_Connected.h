@@ -57,7 +57,7 @@ namespace EinsNN
 			int col = pre_data.shape().back();
 			m_dw = pre_data.transpose().matmul(dLz) / col;
 			m_db = dLz.mean();
-			m_din = m_W.matmul(dLz.transpose()).transpose();
+			m_din = dLz.matmul(m_W.transpose());
 		}
 
 		void update(Optimizer& opt) override
