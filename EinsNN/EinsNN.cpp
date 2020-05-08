@@ -36,7 +36,7 @@ void memory_leak_test()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 4, callback, 100, 0.0001);
+	model.fit(x, y, 4, callback, 10000, 0.001);
 
 	// 학습 시간 출력
 	int takeTime = (clock() - start) / CLOCKS_PER_SEC;

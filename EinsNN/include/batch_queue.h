@@ -51,14 +51,10 @@ namespace EinsNN
 		bool next(TensorD* x, TensorD* y, const int batch_size)
 		{
 			if (m_cursor >= m_size)
-			{
 				return false;
-			}
 
-			bool exist_next = true;
 			x->clear();
 			y->clear();
-
 			for (int i = 0; i < batch_size; i++)
 			{
 				x->append(shuffle_x[m_cursor]);
