@@ -40,7 +40,7 @@ namespace EinsNN
 		{
 			TensorD W({ this->m_in_size, this->m_out_size });
 			TensorD b({ this->m_out_size }, 0);
-			m_W = W.randomInit(-5, 5) / sqrt(m_in_size / 2);
+			m_W = W.randomInit(-5.0, 5.0) / sqrt(m_in_size / 2);
 			m_b = b;
 		}
 
