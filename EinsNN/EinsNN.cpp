@@ -36,7 +36,7 @@ void memory_leak_test()
 	y[3][0] = 22;
 
 	VerboseCallback callback;
-	model.fit(x, y, 4, callback, 10000, 0.001);
+	model.fit(x, y, 4, callback, 1000000, 0.001);
 
 	// 학습 시간 출력
 	int takeTime = (clock() - start) / CLOCKS_PER_SEC;
@@ -55,6 +55,7 @@ void memory_leak_test()
 	new_model.load(path);
 
 	TensorD new_y_pred = new_model.predict(x);
+	std::cout << "new_y_pred : " << new_y_pred << std::endl;
 }
 
 int main()

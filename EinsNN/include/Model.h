@@ -239,7 +239,7 @@ namespace EinsNN
 				back_data = m_layers[i]->back_data();
 			}
 
-	                                                                                                                                                                   		// 첫번째 히든레이어 역전파 계산
+			// 첫번째 히든레이어 역전파 계산
 			m_layers.front()->backprop(input, m_layers[1]->back_data());
 		}
 
